@@ -1,4 +1,5 @@
 from netmiko import ConnectHandler
+import json
 
 def configure_routers(ip, configs):
     print(f"\n Connecting to {ip}")
@@ -47,33 +48,9 @@ def configure_routers(ip, configs):
         print(e)
 
 def main():
-     # define the routers and the commands for interface and ospf configuration
-    routers = {
-        "192.168.62.1": {
-            "interface_config": [
-                'inter f0/1',
-                'ip add 192.168.63.1 255.255.255.0',
-                'no shut'
-            ],
-            "ospf_config": [
-                'router ospf 1',
-                'network 192.168.62.0 0.0.0.255 area 0',
-                'network 192.168.63.0 0.0.0.255 area 0'
-            ]
-        },
-        "192.168.63.2": {
-            "interface_config": [
-                'inter f0/0',
-                'ip add 192.168.64.1 255.255.255.0',
-                'no shut'
-            ],
-            "ospf_config": [
-                'router ospf 1',
-                'network 192.168.63.0 0.0.0.255 area 0',
-                'network 192.168.64.0 0.0.0.255 area 0'
-            ]
-        }
-    }
+    with open(routers.json) as file:
+        routers = json.load(file)
+        
     for ip, configs in routers.items():
          configure_routers(ip, configs)
     

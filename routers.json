@@ -1,0 +1,26 @@
+{
+    "192.168.62.1": {
+        "interface_config": [
+            "interface 0/1",
+            "ip add 192.168.63.1 255.255.255.0",
+            "no shut"
+        ],
+        "ospf_config": [
+            "router ospf 1",
+            "network 192.168.62.0 0.0.0.255 area 0",
+            "network 192.168.63.0 0.0.0.255 area 0"
+        ]
+        },
+    "192.168.63.2": {
+        "interface_config": [
+            "inter f0/0",
+            "p add 192.168.64.1 255.255.255.0",
+            "no shut"
+        ],
+        "ospf_config": [
+            "router ospf 1",
+            "network 192.168.63.0 0.0.0.255 area 0",
+            "network 192.168.64.0 0.0.0.255 area 0"
+        ]
+    }
+}
